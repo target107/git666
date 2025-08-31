@@ -1,0 +1,210 @@
+\documentclass{article}
+\usepackage{xeCJK}
+\usepackage{fvextra}
+\usepackage{graphicx}
+\graphicspath{{./picture/}}  
+\usepackage{fontspec}       % 设置字体
+\usepackage{titlesec}       % 调整标题格式
+\setlength{\parindent}{2em}
+
+\title{{\LARGE \textbf{系统开发工具基础(第一次实验报告)}}} % 标题：加粗 + 大号
+\author{{\Large 程乾楠 24020007014}} % 作者：大号
+\date{\today}
+
+\begin{document}
+\fvset{breaklines=true}
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\section*{1.关于Latex的使用}
+\subsection*{1.0Latex的界面的介绍}
+overleaf可以提供网页端的Latex编辑器的使用，本实验就是在overleaf的帮助下完成的,欢迎提出指正。
+\subsection*{1.1Latex中的转义}
+\begin{Verbatim}
+在使用Latex进行编辑时，\documentclass{article}这一行代码是声明文档的类型，在”\begin{document}“和”\end{document}“之间的就是文档的内容。如果想要使文本内容出现一些代码的文本，就可以使用转义。常见的转义方法有\begin{verbatim}，end{verbatim}。\texttt{} 包裹命令，例如\texttt{\textbackslash documentclass\{article\}}。
+\end{Verbatim}
+
+\subsection*{1.2Latex中如何使用中文}
+要在声明文档类型后使用xeCJK这个包，使用的代码如下：
+\begin{Verbatim}
+\usepackage{xeCJK}
+\end{Verbatim}
+而且要在Menu中改变编译器为XeLatex,然后就可以使用中文了。
+
+\subsection*{1.3换行符的使用}
+在Latex中，换行操作可以使用：
+\begin{Verbatim}
+\newline或者\\
+\end{Verbatim}
+它们不会触发缩进，但是使用两段文字中间空一行的操作，那样就会判定为两段，会触发缩进。
+
+\subsection*{1.4换页符的使用}
+在Latex中，换页符可以使用：
+\begin{Verbatim}
+\newpage，功能是从当前位置强制开始新的一页。而\clearpage，但是后者除了换页，还会把所有未排版的浮动体（figure/table）先输出。
+\end{Verbatim}
+
+\subsection*{1.5居中对齐}
+在写左右居中对齐时，可以用：
+居中对齐：
+\begin{Verbatim}
+将想要居中对齐的内容放到：
+\begin{center} 和\end{center} 中
+\end{Verbatim}
+\newpage
+
+\subsection*{1.6居左居右对齐}
+同1.5一样，将center换为flushright,flushleft就可以了。
+
+\subsection*{1.7插入图片（固定位置）}
+在Latex固定位置中插入图片:
+\begin{Verbatim}
+在固定位置插入图片，需要先新建文件夹存放图片，然后上传图片，需要加一个\usepackage{graphicx}
+之后设置图片搜索路径：
+比如\graphicspath{{./picture/}} ，graphicspath 可以指定图片文件夹。
+然后写入以下代码：
+\includegraphics[width=0.6\textwidth]{图片的文件名}
+或者\includegraphics[width=n cm,height=m cm]{图片的文件名}
+n和m为小于页面的宽度和长度的数字。
+完成这些就可以了。
+展示效果：
+\end{Verbatim}
+\includegraphics[width=0.5\textwidth]{9FE6F6EC3F0468CC7A72ACFB940780F5}
+\includegraphics[width=3cm,height=2cm]{9FE6F6EC3F0468CC7A72ACFB940780F5}\newpage
+
+\subsection*{1.8插入图片（浮动位置）}
+在Latex浮动位置中插入图片:
+\begin{Verbatim}
+在以下代码的基础上：
+\includegraphics[width=0.6\textwidth]{图片的文件名}
+前后加上\begin{figure}和\end{figure}就可以了，其代表含义为图片出现的位置不一定在代码出现的位置上，而是在这个位置附近浮动
+\end{Verbatim}
+\subsection*{1.9英文字体改变}
+\begin{Verbatim}
+使用Hello,world作为例子：
+\textbf{Hello,world}\par
+\underline{Hello, world}\par
+\textit{Hello, world}\par
+{\small Hello, world}\par
+{\large Hello, world}\par
+{\Large Hello, world}\par
+{\LARGE Hello, world}\par
+{\huge Hello, world}\par
+{\Huge Hello, world}\par
+\end{Verbatim}
+\begin{center}
+\textbf{Hello,world}\par
+\underline{Hello, world}\par
+\textit{Hello, world}\par
+{\small Hello, world}\par
+{\large Hello, world}\par
+{\Large Hello, world}\par
+{\LARGE Hello, world}\par
+{\huge Hello, world}\par
+{\Huge Hello, world}\par
+\end{center}
+
+\subsection*{1.10中文字体改变}
+\begin{center}
+\textbf{你好，世界} \par        % 中文粗体
+\underline{你好，世界} \par      % 中文下划线
+\textit{你好，世界} \par         % 中文斜体
+{\small 你好，世界} \par        % 小号字体
+{\large 你好，世界} \par        % 大号字体
+{\Large 你好，世界} \par        % 更大字体
+{\LARGE 你好，世界} \par        % 进一步增大字体
+{\huge 你好，世界} \par         % 很大的字体
+{\Huge 你好，世界} \par\newpage         % 最大字体
+\end{center}
+
+\subsection*{1.11插入表格}
+使用：
+\begin{table}[htbp]   % 'htbp'表示浮动位置，确保表格尽量在合适的位置
+    \centering
+    \begin{tabular}{|c|c|c|}   % 表格有三列，每列都居中对齐，边界用竖线表示
+        \hline  % 添加表格的横线
+        列1 & 列2 & 列3 \\   % 表格第一行
+        \hline
+        内容1 & 内容2 & 内容3 \\
+        \hline
+        内容4 & 内容5 & 内容6 \\
+        \hline
+    \end{tabular}
+    \caption{简单表格示例}  % 表格标题
+    \label{tab:simple_table} % 表格标签，便于引用
+\end{table}
+\subsection*{1.12图片加标题}
+\begin{figure}[h]
+\caption{鸣潮角色图片}
+\centering
+\includegraphics[width=0.4\textwidth]{9FE6F6EC3F0468CC7A72ACFB940780F5}
+\end{figure}
+
+\subsection*{1.12图片引用}
+\begin{figure}[h]
+\caption{鸣潮角色图片}
+\centering
+\includegraphics[width=0.4\textwidth]{9FE6F6EC3F0468CC7A72ACFB940780F5}
+\label{fig:sample_image} 
+\end{figure}
+如图 \ref{fig:sample_image} 所示，这是一张示例图片。
+
+\section*{2.git的使用}
+\subsection*{2.1在VS Code 里配置 Git 的用户名和邮箱，让它和 GitHub 对应上}
+git config --global user.name "你的GitHub用户名"
+git config --global user.email "你的GitHub邮箱"
+使用这两行指令，可以用VS Code 里配置 Git 的用户名和邮箱，user.name 建议和 GitHub 上的用户名一致。
+user.email 必须是 GitHub 账号绑定的邮箱，否则 GitHub 可能不会显示你是这次提交的作者。
+\subsection*{2.2使用SSH key 的方式把本地 Git 和 GitHub 连接起来}
+通过git bash输入这行指令ssh-keygen -t rsa，之后会显示储存位置，
+找到公钥，并把它输入到github上的SSH keys里，名字可以随便取。
+
+\includegraphics[width=0.6\textwidth]{ad}
+这里是弄好的截图。
+
+\subsection{2.3给 Git 设置代理}
+通过以下两行指令设置代理：
+git config --global http.proxy http://127.0.0.1:代理的端口
+git config --global https.proxy http://127.0.0.1:代理的端口
+
+\subsection{2.4将GitHub上的仓库克隆到本地文件夹中}
+使用HTTPS方式克隆：先打开想要克隆到的文件夹，在里面打开git bash，然后输入：
+git clone https://github.com/yourname/myrepo.git
+\subsection*{2.5查看当前文件状态}
+通过git status可以完成。
+
+\includegraphics[width=0.6\textwidth]{ams}
+
+\subsection*{2.6将文件上传到github}
+先添加到暂存区，通过git add filename.后缀 来进行添加。
+
+\includegraphics[width=0.6\textwidth]{qqq}
+
+再提交到本地仓库：
+git commit -m "本地仓库名“
+
+然后通过HTTPS连上远程仓库：
+本人最开始把通过SSH连接远程仓库的地址格式弄错了，弄成这样了：
+
+git@https://github.com/target107/git666.git
+
+导致我后来又修改了origin指向的地址，
+git remote set-url origin https://github.com/target107/git666.git
+
+之后才推送成功的：
+git push -u origin master\newpage
+
+\includegraphics[width=0.7\textwidth]{www}
+
+\includegraphics[width=0.7\textwidth]{eee}
+
+\section*{3.实验后的反思}
+
+\subsection*{3.1实验中存在的问题}
+在使用转义时，没有考虑到verbatim不会换行的问题，使用ai提出的方法时，没有考虑到自动换行是加强内容，要使用fvextra包。
+在学习git时遇到的问题很多，什么操作也不会，也不知道是干什么的，后来的学习才认识到git的作用，就比如SSH连接远程仓库,最后发现密钥用不了，试验结束后再看看能不能用SSH连接到github仓库。
+
+\subsection*{3.2实验后的反思}
+在学习时，一定要举一反三，学习时要灵活多变，边学边实践才是最正确的学习方法
+\end{document}
